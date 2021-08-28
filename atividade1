@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h> 
+#include <locale.h>
+#include <string.h>
+
+int count;
+//Caracteristicas do veículo
+struct veiculo{
+char modelo[30];
+char marca[30];
+int ano;         
+char placa[30]; 
+};
+
+int main() {
+	int opcaoMenu, i, anov;
+	char modelov[30];
+
+	//Menu inicial
+	struct veiculo carro[10]; //Definindo maximo de 10 cadastros
+	setlocale(LC_ALL, "Portuguese");
+	printf("\n\n ### Cadastro de Veiculos ### \n");
+	printf("\n[1] Cadastrar veículo\n");
+	printf("[2] Listar veiculos\n");
+	printf("[3] Listar veiculos por ano\n");
+	printf("[4] Listar veiculos por modelo\n");
+    printf("[5] Listar veiculos acima do ano (XXXX)\n");
+ 	printf("[0] Sair\n\n");
+
+	do{
+		printf("\nDigite um número do menu: ");
+ 		scanf("%d", &opcaoMenu);
+ 		printf("\n");
+		
+ 		switch(opcaoMenu){
+			case 1: //Cadastrar veiculo
+				if (count < 10){
+						printf("### Cadastrar Veículo ###\n");
+ 						printf("Digite a marca do veículo: ");
+						scanf("%s", carro[count].marca);
+ 						printf("Digite o modelo do veículo: ");
+						scanf("%s", carro[count].modelo);
+						printf("Digite o ano do veículo: ");
+						scanf("%d", &carro[count].ano);
+						printf("Digite a placa do veículo: ");
+						scanf("%s", carro[count].placa);
+						count++;
+						printf("%d Veículo cadastrado!!!\n\n", count);
+						
+					}else{
+						printf("Limite de cadastros atingido!!!");
+						
+					}
+			break;
+			
+			case 2: //Listar veiculos
+				printf("### Veículos cadastrados ###\n");
+				for (i = 0; i < count; i++){
+					printf("%s %s %d %s\n",carro[i].marca, carro[i].modelo, carro[i].ano, carro[i].placa);
+				};
+			break;
+
+			case 3: //Listar veiculos por ano
+				printf("Digite o ano do veículo: ");
+				scanf("%d", &anov);
+				for(i = 0; i < count; i++){
+					if(carro[i].ano == anov){
+						printf("%s %s %d %s \n",carro[i].marca, carro[i].modelo, carro[i].ano, carro[i].placa);
+						
+					}
+				};
+			break;
+
+			case 4: //Listar veiculos por modelo
+				printf("Digite o modelo do veículo: ");
+				scanf("%s", modelov);
+				for(i = 0; i < count; i++){
+					if (strcmp (carro[i].modelo, modelov) == 0){
+						printf("%s %s %d %s \n",carro[i].marca, carro[i].modelo, carro[i].ano, carro[i].placa);
+					}
+				};
+
+			case 5: //Listar veiculos acima do ano XXXX
+				printf("Digite o ano do veículo: ");
+				scanf("%d", &anov);
+				for(i = 0; i < count; i++){
+					if(carro[i].ano > anov){
+						printf("%s %s %d %s \n",carro[i].marca, carro[i].modelo, carro[i].ano, carro[i].placa);
+					}
+				};
+			break;
+			
+			}
+		} while (opcaoMenu != 0);
+		return 0;
+	}
